@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7cf8f0a5ea19c9d46a105f8245110e5b
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Ariston Comic Demo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6c47e8be0b5b16048b28967d70c227c4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
