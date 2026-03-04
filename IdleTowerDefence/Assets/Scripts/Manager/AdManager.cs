@@ -6,16 +6,20 @@ public class AdManager : MonoBehaviour
 {
     public static AdManager Get;
 
+    private BannerView bannerAd;
     private InterstitialAd interstitialAd;
     private RewardedAd rewardedAd;
 
     // Ad IDs
     [Header("AdMob IDs")]
+    [SerializeField] private string androidBannerAdId = "ca-app-pub-3940256099942544/6300978111";
     [SerializeField] private string androidInterstitialAdId = "ca-app-pub-8631672248244079/1315719195";
     [SerializeField] private string androidRewardedAdId = "ca-app-pub-8631672248244079/3526949566";
+    [SerializeField] private string iOSBannerAdId = "ca-app-pub-3940256099942544/6300978111";
     [SerializeField] private string iOSInterstitialAdId = "ca-app-pub-8631672248244079/1798763480";
     [SerializeField] private string iOSRewardedAdId = "ca-app-pub-8631672248244079/3502727391";
 
+    private string bannerAdId;
     private string interstitialAdId;
     private string rewardedAdId;
 
@@ -32,9 +36,11 @@ public class AdManager : MonoBehaviour
         Get = this;
 
 #if UNITY_ANDROID
+        bannerAdId = androidBannerAdId;
         interstitialAdId = androidInterstitialAdId;
         rewardedAdId = androidRewardedAdId;
 #elif UNITY_IOS
+        bannerAdId = iOSBannerAdId;
         interstitialAdId = iOSInterstitialAdId;
         rewardedAdId = iOSRewardedAdId;
 #endif
@@ -55,6 +61,41 @@ public class AdManager : MonoBehaviour
         });
 
         lastAdTime = Time.realtimeSinceStartup;
+    }
+
+    // ---------------- BANNER ----------------
+
+    public void LoadAndShow()
+    {
+        DestroyBanner();
+
+        // dp width safe for notches etc.
+        int width = MobileAds.Utils.GetDeviceSafeWidth();
+
+        // Portrait-only adaptive banner size
+        AdSize adSize = AdSize.GetPortraitAnchoredAdaptiveBannerAdSizeWithWidth(width);
+
+        bannerAd = new BannerView(bannerAdId, adSize, AdPosition.Bottom);
+
+        bannerAd.OnBannerAdLoaded += () => Debug.Log("Adaptive portrait banner loaded");
+        bannerAd.OnBannerAdLoadFailed += (LoadAdError e) => Debug.LogError("Banner failed: " + e);
+
+        bannerAd.LoadAd(new AdRequest());
+        bannerAd.Show();
+    }
+
+    public void Hide()
+    {
+        bannerAd?.Hide();
+    }
+
+    public void DestroyBanner()
+    {
+        if (bannerAd != null)
+        {
+            bannerAd.Destroy();
+            bannerAd = null;
+        }
     }
 
     // ---------------- INTERSTITIAL ----------------
@@ -208,5 +249,6 @@ public class AdManager : MonoBehaviour
     {
         interstitialAd?.Destroy();
         rewardedAd?.Destroy();
+        bannerAd?.Destroy();
     }
 }

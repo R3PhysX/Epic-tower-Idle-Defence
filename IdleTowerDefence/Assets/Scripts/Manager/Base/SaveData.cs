@@ -67,6 +67,7 @@ public class SaveData
     public int CardTutorial = 0;
 
     public bool enabled_NoAds;
+    public bool enabled_BannerAd;
     public bool enabled_3;
     public bool enabled_3_5;
     public bool enabled_5;

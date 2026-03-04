@@ -60,7 +60,24 @@ public class GameplayManager : MonoBehaviour
             world_background[i].gameObject.SetActive(i == ActiveGameData.Instance.currentSelectedWorld);
         }
 
-        if(currentWave >= 1) {
+        if(ActiveGameData.Instance.saveData.enabled_BannerAd)
+        {
+            Debug.Log("Showing Banner as it is active!");
+            if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+            {
+                component.ShowBanner();
+            }
+        }
+        else
+        {
+            Debug.Log("Not Showing Banner as it is not active!");
+            if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+            {
+                component.HideBanner();
+            }
+        }
+
+        if (currentWave >= 1) {
 
             if (ActiveGameData.Instance.currentSelectedWorld == 0)
             {

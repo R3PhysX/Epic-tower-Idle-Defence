@@ -61,12 +61,14 @@ public class WaveItem : MonoBehaviour
 
         // Calculate reward based on the current world
         if (ActiveGameData.Instance.currentSelectedWorld == 2)
-            gain = (wave * 100) + ((wave) * 150);
+            gain = (wave * 100) + ((wave) * UnityEngine.Random.Range(1, 150));
         else
-            gain = (wave * 50) + ((wave - 3) * 50);
+            gain = (wave * 50) + ((wave - 3) * UnityEngine.Random.Range(1, 50));
 
         if (collectPrevious)
             gain += CollectAllPreviousWaves();
+
+        gain = Math.Min(gain, 3500);
 
         // Add the gold coin reward
         ActiveGameData.Instance.saveData.GoldCoin += gain;
@@ -120,9 +122,9 @@ public class WaveItem : MonoBehaviour
             // Calculate reward for the current wave
             int gain = 0;
             if (ActiveGameData.Instance.currentSelectedWorld == 2)
-                gain = (i * 100) + (i * 150);
+                gain = (i * 100) + (i * UnityEngine.Random.Range(1, 150));
             else
-                gain = (i * 50) + ((i - 3) * 50);
+                gain = (i * 50) + ((i - 3) * UnityEngine.Random.Range(1, 50));
 
             totalGain += gain; // Accumulate the reward
             collectedRewards.Add(i); // Mark the wave as collected
