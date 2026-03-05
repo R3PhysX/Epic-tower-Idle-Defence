@@ -75,6 +75,11 @@ public class SceneLoadManager : MonoBehaviour
 
     public void LoadScene(Scenes mscene)
     {
+        if(mscene == Scenes.MainMenu)
+        {
+            AdManager.Get.DestroyBanner();
+        }
+
         LoadScene((int)mscene);
     }
 

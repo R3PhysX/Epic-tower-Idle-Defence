@@ -105,7 +105,7 @@ public class EnemyGenerator : MonoBehaviour
         }
         Debug.Log("Wave " + roll);
 
-        if (roll < 50) plan.type = WaveArchetype.Elite;
+        if (roll < 50) plan.type = WaveArchetype.Normal;
         else if (roll < 70) plan.type = WaveArchetype.Swarm;
         else if (roll < 80) plan.type = WaveArchetype.Tank;
         else if (roll < 90) plan.type = WaveArchetype.Speed;

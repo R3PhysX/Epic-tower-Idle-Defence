@@ -229,7 +229,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyNewType == EnemyType.EliteEnemy)
         {
-            health += GameplayManager.Get.currentWave;
+            health += GameplayManager.Get.currentWave * 3;
         }
         maxHealth = health;
         damage = damageVal;
@@ -442,21 +442,33 @@ public class Enemy : MonoBehaviour
 
         silverCoinForKill = (enemyType == EnemyType.EliteEnemy) ? GameplayManager.Get.randomGenerator.Next(10, 200) : GameplayManager.Get.randomGenerator.Next(1, 3);
 
+        if(ActiveGameData.Instance.saveData.enabled_BannerAd) { silverCoinForKill = silverCoinForKill * 2; }
+
         EventManager.TriggerEvent(EventID.Add_SilverCoin, silverCoinForKill);
 
         GameplayManager.Get.ShowSilverCoinGain(transform.position, silverCoinForKill);
 
         if (GameplayManager.Get.randomGenerator.Next(0, 100) < 27)
         {
-            EventManager.TriggerEvent(EventID.Add_GoldCoin, 1);
-            GameplayManager.Get.ShowGoldCoinGain(transform.position + new Vector3(0.2f, 0.2f, 0), 1);
+            int coinsEarn = 1;
+            if (ActiveGameData.Instance.saveData.enabled_BannerAd) {
+                coinsEarn = coinsEarn * 2;
+            }
+
+            EventManager.TriggerEvent(EventID.Add_GoldCoin, coinsEarn);
+            GameplayManager.Get.ShowGoldCoinGain(transform.position + new Vector3(0.2f, 0.2f, 0), coinsEarn);
         }
         else
         {
             if(enemyType == EnemyType.EliteEnemy)
             {
-                EventManager.TriggerEvent(EventID.Add_GoldCoin, GameplayManager.Get.randomGenerator.Next(10, 50));
-                GameplayManager.Get.ShowGoldCoinGain(transform.position + new Vector3(0.2f, 0.2f, 0), 1);
+                int coinsEarnElite = GameplayManager.Get.randomGenerator.Next(10, 50);
+                if (ActiveGameData.Instance.saveData.enabled_BannerAd)
+                {
+                    coinsEarnElite = coinsEarnElite * 2;
+                }
+                EventManager.TriggerEvent(EventID.Add_GoldCoin, coinsEarnElite);
+                GameplayManager.Get.ShowGoldCoinGain(transform.position + new Vector3(0.2f, 0.2f, 0), coinsEarnElite);
             }
         }
     }
