@@ -131,6 +131,13 @@ public class AdManager : MonoBehaviour
         if (!canRunOnEditorInterstitial) return;
 #endif
 
+        // No-Ads purchase: skip interstitial entirely
+        if (ActiveGameData.Instance != null && ActiveGameData.Instance.saveData.enabled_NoAds)
+        {
+            Debug.Log("Interstitial skipped: No-Ads purchased");
+            return;
+        }
+
         if (Time.realtimeSinceStartup - lastAdTime < interstitialInterval)
             return;
 
@@ -203,6 +210,14 @@ public class AdManager : MonoBehaviour
             return;
         }
 #endif
+
+        // No-Ads purchase: grant reward immediately without showing an ad
+        if (ActiveGameData.Instance != null && ActiveGameData.Instance.saveData.enabled_NoAds)
+        {
+            Debug.Log("Rewarded Ad skipped: No-Ads purchased — reward granted automatically");
+            callback?.Invoke(true);
+            return;
+        }
 
         rewardCallback = callback;
         rewardGranted = false;
