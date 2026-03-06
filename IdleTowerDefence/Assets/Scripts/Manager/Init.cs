@@ -44,6 +44,7 @@ public class Init : MonoBehaviour
 
     private void Start()
     {
+
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;

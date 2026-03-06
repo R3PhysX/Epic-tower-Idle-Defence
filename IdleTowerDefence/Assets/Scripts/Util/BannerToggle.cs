@@ -18,7 +18,11 @@ public class BannerToggle : MonoBehaviour
 
     void Start()
     {
-
+        if(ActiveGameData.Instance.saveData.enabled_NoAds)
+        {
+            bannerArea.SetActive(false);
+            bonusBar.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -45,7 +49,7 @@ public class BannerToggle : MonoBehaviour
         //screensRoot.anchoredPosition = targetPos;
         //screensRoot.offsetMax = isOn ? new Vector2(0, -bannerHeight) : new Vector2(0,0);
         screensRoot.offsetMin = isOn ? new Vector2(0, bannerHeight) : new Vector2(0, 0);
-        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight+20f) : new Vector2(0, 0);
+        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight+30f) : new Vector2(0, 0);
 
         if (isOn) { AdManager.Get.LoadAndShow(); textMeshProUGUI.text = "Hide & Stop x2 Rewards"; } else { AdManager.Get.DestroyBanner(); textMeshProUGUI.text = "Enable x2 Rewards"; }
 
@@ -59,7 +63,7 @@ public class BannerToggle : MonoBehaviour
         targetPos = screensRoot.anchoredPosition;
         targetPos.y = bannerHeight;
         screensRoot.offsetMin = isOn ? new Vector2(0, bannerHeight) : new Vector2(0, 0);
-        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight + 20f) : new Vector2(0, 0);
+        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight + 30f) : new Vector2(0, 0);
         AdManager.Get.LoadAndShow();
         textMeshProUGUI.text = "Hide & Stop x2 Rewards";
     }
@@ -71,7 +75,7 @@ public class BannerToggle : MonoBehaviour
         targetPos = screensRoot.anchoredPosition;
         targetPos.y = 0f;
         screensRoot.offsetMin = isOn ? new Vector2(0, bannerHeight) : new Vector2(0, 0);
-        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight + 20f) : new Vector2(0, 0);
+        bonusBar.anchoredPosition = isOn ? new Vector2(0, bannerHeight + 30f) : new Vector2(0, 0);
         AdManager.Get.DestroyBanner();
         textMeshProUGUI.text = "Enable x2 Rewards";
     }

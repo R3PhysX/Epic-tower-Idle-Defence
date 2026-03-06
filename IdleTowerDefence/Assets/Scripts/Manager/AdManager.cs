@@ -12,10 +12,10 @@ public class AdManager : MonoBehaviour
 
     // Ad IDs
     [Header("AdMob IDs")]
-    [SerializeField] private string androidBannerAdId = "ca-app-pub-3940256099942544/6300978111";
+    [SerializeField] private string androidBannerAdId = "ca-app-pub-8631672248244079/2191011340";
     [SerializeField] private string androidInterstitialAdId = "ca-app-pub-8631672248244079/1315719195";
     [SerializeField] private string androidRewardedAdId = "ca-app-pub-8631672248244079/3526949566";
-    [SerializeField] private string iOSBannerAdId = "ca-app-pub-3940256099942544/6300978111";
+    [SerializeField] private string iOSBannerAdId = "ca-app-pub-8631672248244079/8544337137";
     [SerializeField] private string iOSInterstitialAdId = "ca-app-pub-8631672248244079/1798763480";
     [SerializeField] private string iOSRewardedAdId = "ca-app-pub-8631672248244079/3502727391";
 

@@ -60,20 +60,23 @@ public class GameplayManager : MonoBehaviour
             world_background[i].gameObject.SetActive(i == ActiveGameData.Instance.currentSelectedWorld);
         }
 
-        if(ActiveGameData.Instance.saveData.enabled_BannerAd)
+        if (!ActiveGameData.Instance.saveData.enabled_NoAds)
         {
-            Debug.Log("Showing Banner as it is active!");
-            if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+            if (ActiveGameData.Instance.saveData.enabled_BannerAd)
             {
-                component.ShowBanner();
+                Debug.Log("Showing Banner as it is active!");
+                if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+                {
+                    component.ShowBanner();
+                }
             }
-        }
-        else
-        {
-            Debug.Log("Not Showing Banner as it is not active!");
-            if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+            else
             {
-                component.HideBanner();
+                Debug.Log("Not Showing Banner as it is not active!");
+                if (canvasGroup.TryGetComponent<BannerToggle>(out BannerToggle component))
+                {
+                    component.HideBanner();
+                }
             }
         }
 
